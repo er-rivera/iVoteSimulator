@@ -3,9 +3,9 @@ import java.util.List;
 
 public class MultipleChoiceQuestion implements Question {
     private String question;
-    private List<String> answers;
-    private int correctAnswer;
-    char letter;
+    private List<Answer> answers;
+    private int correctAnswer = -1;
+    private char letter;
 
     public MultipleChoiceQuestion(String question){
         this.question = question;
@@ -14,27 +14,33 @@ public class MultipleChoiceQuestion implements Question {
     }
 
     @Override
-    public void addAnswer(String s){
-        answers.add(letter + ". " + s);
-        letter++;
-    }
-
-    @Override
     public String getCorrectAnswer() {
-        return answers.get(correctAnswer);
-    }
-
-    @Override
-    public void setCorrectAnswer(Object correctAnswer) {
-        this.correctAnswer = Character.getNumericValue((char)correctAnswer) - 65;
-    }
-
-    @Override
-    public void displayQuestion() {
-        System.out.println(question);
-        System.out.println();
-        for(String answer : answers){
-            System.out.println(answer);
+        if(correctAnswer == -1){
+            return "No Correct Answer was given.";
+        }else{
+            return answers.get(correctAnswer).toString();
         }
     }
+
+    @Override
+    public boolean addCandidateAnswer(String answer, boolean isCorrectAnswer) {
+        String formattedAnswer = letter + ". " + answer;
+        answers.add(new Answer(formattedAnswer, isCorrectAnswer));
+        letter++;
+        if(isCorrectAnswer){
+            correctAnswer = answers.size() - 1;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Answer> getCandidateAnswers() {
+        return answers;
+    }
+
+    @Override
+    public String getPrompt() {
+        return question;
+    }
+
 }

@@ -1,12 +1,11 @@
-/**
- * Created by user on 7/3/17.
- */
+import java.util.List;
+
 public interface Question {
     public String getCorrectAnswer();
 
-    public void setCorrectAnswer(Object correctAnswer);
+    public boolean addCandidateAnswer(String answer, boolean isCorrectAnswer);
 
-    public void addAnswer(String answer);
+    public List<Answer> getCandidateAnswers();
 
-    public void displayQuestion();
+    public String getPrompt();
 }
