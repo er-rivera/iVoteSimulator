@@ -8,10 +8,6 @@ public class Answer {
         this.isCorrectAnswer = isCorrectAnswer;
     }
 
-    public boolean isCorrectAnswer() {
-        return isCorrectAnswer;
-    }
-
     @Override
     public String toString() {
         return answer;

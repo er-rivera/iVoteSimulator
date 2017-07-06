@@ -1,21 +1,32 @@
-/**
- * Created by user on 7/3/17.
- */
+import java.util.Random;
+
 public class SimulationDriver {
     public static void main(String[] args){
         iVoteService iV = iVoteService.getInstance();
-        iV.configurePromptAndType("Here is my Question","Single Choice Question");
-        iV.addCandidateAnswer("Answer 1",false);
-        iV.addCandidateAnswer("Answer 2",true);
-        iV.addCandidateAnswer("Answer 3",false);
+        iV.configurePromptAndType("What is the capital of California?","Multiple Choice Question");
+        iV.addCandidateAnswer("San Diego",false);
+        iV.addCandidateAnswer("San Jose",true);
+        iV.addCandidateAnswer("Sacremento",false);
+        iV.addCandidateAnswer("Eureka",false);
         iV.start();
-        Student student1 = new Student();
-        Student student2 = new Student();
-        Student student3 = new Student();
-        Student student4 = new Student();
-        Student student5 = new Student();
-        //student1.setAnswer();
-        //iV.displayStatistics();
+        Random ran = new Random();
+        int numOfStudents = ran.nextInt(20) + 1;
+        int numOfCandidateAnswers = iV.getQuestion().getCandidateAnswers().size();
+        for(int i = 0; i < numOfStudents; i++){ //randomizes between 1 - 20 students
+            Student student = new Student();
+            student.setAnswer(randomizeAnswer(numOfCandidateAnswers));
+            iV.addStudentResponse(student);
+        }
+
+        iV.displayStatistics();
+    }
+
+    //randomizes answer for student
+    public static char randomizeAnswer(int size){
+        int valOfA = 65;
+        Random random = new Random();
+        int index = random.nextInt(size) + valOfA;
+        return (char)index;
     }
 
 }

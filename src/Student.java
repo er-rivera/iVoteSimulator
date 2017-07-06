@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Student{
     private String id;
-    private String answer;
+    private char answer;
 
     public Student(){
         generateID();
@@ -19,7 +19,7 @@ public class Student{
         id = stringBuilder.toString();
     }
 
-    public String getAnswer() {
+    public char getAnswer() {
         return answer;
     }
 
@@ -27,7 +27,7 @@ public class Student{
         return id;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(char answer) {
         this.answer = answer;
     }
 }
